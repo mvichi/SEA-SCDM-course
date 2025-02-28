@@ -1,0 +1,503 @@
+%% LyX 2.3.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english,aspectratio=169]{beamer}
+\usepackage{lmodern}
+\renewcommand{\sfdefault}{lmss}
+\renewcommand{\ttdefault}{lmtt}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\setlength{\parskip}{\medskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{babel}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\PassOptionsToPackage{normalem}{ulem}
+\usepackage{ulem}
+\ifx\hypersetup\undefined
+  \AtBeginDocument{%
+    \hypersetup{unicode=true}
+  }
+\else
+  \hypersetup{unicode=true}
+\fi
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\pdfpageheight\paperheight
+\pdfpagewidth\paperwidth
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+% this default might be overridden by plain title style
+\newcommand\makebeamertitle{\frame{\maketitle}}%
+% (ERT) argument for the TOC
+\AtBeginDocument{%
+  \let\origtableofcontents=\tableofcontents
+  \def\tableofcontents{\@ifnextchar[{\origtableofcontents}{\gobbletableofcontents}}
+  \def\gobbletableofcontents#1{\origtableofcontents}
+}
+\newenvironment{lyxcode}
+  {\par\begin{list}{}{
+    \setlength{\rightmargin}{\leftmargin}
+    \setlength{\listparindent}{0pt}% needed for AMS classes
+    \raggedright
+    \setlength{\itemsep}{0pt}
+    \setlength{\parsep}{0pt}
+    \normalfont\ttfamily}%
+   \def\{{\char`\{}
+   \def\}{\char`\}}
+   \def\textasciitilde{\char`\~}
+   \item[]}
+  {\end{list}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usetheme{CambridgeUS}
+%\usecolortheme{dove}
+\hypersetup{pdfpagemode=None}
+\usepackage{tikz}
+\usepackage{color}
+\usepackage{listings}
+
+% This allows to change color of symbols in math
+\newcommand*{\mathcolor}{}
+\def\mathcolor#1#{\mathcoloraux{#1}}
+\newcommand*{\mathcoloraux}[3]{%
+  \protect\leavevmode
+  \begingroup
+    \color#1{#2}#3%
+  \endgroup
+}
+
+\makeatother
+
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Listing}
+
+\begin{document}
+\title[Theory ]{Programming and algorithms}
+\author{Marcello Vichi}
+\institute[UCT]{Department of Oceanography\\marcello.vichi@uct.ac.za}
+\date{AOS}
+\makebeamertitle
+
+\section*{Outlines}
+\begin{frame}{Outline}
+
+\tableofcontents{}
+\end{frame}
+
+\section{Introduction to programming languages}
+\begin{frame}{Programming languages}
+
+\begin{itemize}
+\item A programming language is a set of structured instructions that tell
+the computer what to do. There have been many programming languages
+in the history of computer science. Some of them survived from the
+early 60's (FORTRAN) or evolved (ANSI C into C++ and C\#) but only
+a few are very much used today in general applications: Python, C++,
+PHP, and Java.
+\item Why so many languages? (\href{http://www.levenez.com/lang/}{http://www.levenez.com/lang/})
+\end{itemize}
+\end{frame}
+
+\begin{frame}{High-level and low level languages}
+
+\begin{itemize}
+\item {\small{}FORTRAN, Python, C++, PHP, C\#, Java, etc }\textbf{\small{}are
+high-level languages}{\small\par}
+\item {\small{}There are also low-level languages, sometimes referred to
+as machine languages or assembly languages. Loosely speaking, computers
+can only execute programs written in low-level languages. Thus, programs
+written in a high-level language have to be translated into something
+more suitable before they can run. (Useful resource: http://openbookproject.net/thinkcs/python/english3e/index.html)}{\small\par}
+\item {\small{}Almost all programs are written in high-level languages because
+of their advantages. It is much easier to program in a high-level
+language so programs take less time to write, they are shorter and
+easier to read, and they are more likely to be correct. Secondly,
+high-level languages are portable, meaning that they can run on different
+kinds of computers with few or no modifications}{\small\par}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The winning trend in computer programming}
+
+\begin{itemize}
+\item To create and work with objects:
+
+\begin{itemize}
+\item Reusable software components that model items in the real world
+\item Meaningful software units: Date objects, time objects, invoice objects,
+audio objects, video objects, file objects, record objects, model
+grid objects, etc. These classes allow to define the rules controlling
+the ``life'' of these objects in the code
+\item Any noun can be represented as an object
+\end{itemize}
+\item Very reusable
+\item More understandable, better organized, and easier to maintain than
+procedural programming
+\item Favour modularity
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Interpreters and compilers (I)}
+
+\begin{itemize}
+\item The instructions for the computer need to be fed to the CPU. How does
+it happen? Through \textbf{interpreters} and/or \textbf{compilers}.\footnote{https://www.freebsd.org/doc/en\_US.ISO8859-1/books/developers-handbook/tools-programming.html}
+\item With an \textbf{interpreter}, the language comes as an environment,
+where you type in commands at a prompt and the environment executes
+them for you. For more complicated programs, you can type the commands
+into a file and get the interpreter to load the file and execute the
+commands in it. If anything goes wrong, many interpreters will drop
+you into a debugger to help you track down the problem.
+\item The advantage of this is that you can see the results of your commands
+immediately, and mistakes can be corrected readily.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Interpreters and compilers (II)}
+
+\begin{itemize}
+\item \textbf{Compilers} are rather different. You write your code in a
+file (or files) using an \textbf{editor} (that interpret ASCII characters,
+like textedit in windows). You then run the compiler and see if it
+accepts your program. If it did not compile, \emph{grit your teeth}
+and go back to the editor; if it did compile and gave you an \textbf{executable
+program} (an \emph{app}), you can run it either at a shell command
+prompt or in a debugger to see if it works properly. 
+\item Not quite as direct as using an interpreter. However it allows you
+to do things that are very difficult or even impossible with an interpreter:
+writing code which interacts closely with the operating system; write
+very efficient code, as the compiler can optimize the code, which
+would not be acceptable in an interpreter. Finally, this is the way
+people create \emph{apps} for various operating systems!
+\item As the edit-compile-run-debug cycle is rather tedious when using separate
+programs, many commercial compiler makers have produced \textbf{Integrated
+Development Environments} (IDEs for short). 
+\end{itemize}
+\end{frame}
+%
+\begin{frame}{The UNIX shell and the home directory}
+
+The language used in the terminal shell is an interpreted language.It
+allows you to interact with the file system and your data files. When
+the terminal is launched, it usually goes to your personal directory
+(the unix name for a folder), which is called your \emph{home} (note
+that in WSL this is your windows home)
+\begin{itemize}
+\item All the users' directories are in /home
+\end{itemize}
+\begin{lyxcode}
+/home/marcello
+
+/home/student
+\end{lyxcode}
+\begin{itemize}
+\item It is the location where all your files go (organised into subdirectories).
+Location of many startup and customization files.
+\item It can be local (as in your case) or \emph{mounted} from an external
+file server
+\item Run the command \texttt{cd} (change directory, by itself) to take
+you home from wherever you are
+\end{itemize}
+\end{frame}
+%
+\begin{frame}{The UNIX filesystem}
+\centering \includegraphics[width=5cm]{figures/unix_filesystem.png}
+
+\begin{itemize}
+\item {\footnotesize{}Every file has a name and }\textbf{\footnotesize{}file
+names}{\footnotesize{} are case-sensitive! Unix file names can contain
+any characters (although some make it difficult to access the file)
+except the null character and the slash (/). }{\footnotesize\par}
+\item {\footnotesize{}A }\textbf{\footnotesize{}directory}{\footnotesize{}
+is a special kind of file - Unix uses a directory to hold information
+about other files}{\footnotesize\par}
+\item {\footnotesize{}Each file in the same directory must have a unique
+name. Files that are in different directories can have the same name.
+Files that start with a '.' are by default hidden}{\footnotesize\par}
+\item {\footnotesize{}The }\textbf{\footnotesize{}filesystem}{\footnotesize{}
+is a hierarchical system of organizing files and directories. The
+top level in the hierarchy is called the \textquotedbl root\textquotedbl{}
+and holds all files and directories. The name of the root directory
+is / }{\footnotesize\par}
+\end{itemize}
+\end{frame}
+%
+\begin{frame}{The UNIX pathname}
+\begin{columns}[t]
+
+
+\column{7cm}
+\begin{itemize}
+\item {\footnotesize{}The }\textbf{\footnotesize{}pathname}{\footnotesize{}
+of a file includes: }\emph{\footnotesize{}the file name, AND the name
+of the directory that holds the file, AND the name of the directory
+that holds the directory that holds the file, AND the name of the
+\dots{} and so on up to the root }{\footnotesize\par}
+\item {\footnotesize{}These pathnames are called }\textbf{\footnotesize{}absolute
+pathnames}{\footnotesize\par}
+\item {\footnotesize{}The pathname of every file in a given filesystem is
+unique}{\footnotesize\par}
+\item {\footnotesize{}You can use }\textbf{\footnotesize{}relative pathnames}{\footnotesize{},
+that depend on the current working directory}{\footnotesize\par}
+\end{itemize}
+
+\column{6cm}
+
+\includegraphics[width=5cm]{figures/unix_pathnames}
+\begin{lyxcode}
+{\footnotesize{}\$~cd~/home/Hollid2}{\footnotesize\par}
+
+{\footnotesize{}\$~pwd}{\footnotesize\par}
+
+{\footnotesize{}/home/Hollid2}{\footnotesize\par}
+
+{\footnotesize{}\$~ls~unix/Syllabus}{\footnotesize\par}
+
+{\footnotesize{}unix/Syllabus}{\footnotesize\par}
+
+{\footnotesize{}\$~ls~X}{\footnotesize\par}
+
+{\footnotesize{}ls:~X:~No~such~file~or~directory}{\footnotesize\par}
+
+{\footnotesize{}\$~ls~/home/scully/X}{\footnotesize\par}
+
+{\footnotesize{}/home/scully/X}{\footnotesize\par}
+\end{lyxcode}
+\end{columns}
+
+\end{frame}
+%
+\begin{frame}{Practicing is the only way forward}
+
+The UNIX commands are mnemonic, hence the only way to learn them is
+through practicing a few examples
+\begin{itemize}
+\item Read the quick introduction found here \href{https://earth-env-data-science.github.io/lectures/environment/intro_to_unix.html}{https://earth-env-data-science.github.io/lectures/environment/intro\_to\_unix.html}
+\item Practice the tutorial on VULA (from \href{http://swcarpentry.github.io/shell-novice/}{Software Carpentry})
+\end{itemize}
+\end{frame}
+%
+\begin{frame}[fragile]{Example: a batch script to retrieve multiple files}
+\begin{itemize}
+\item The example below is a program (\emph{script}) written in \emph{bash}
+(Bourn Again SHell, the default shell in linux) that uses the unix
+commands \texttt{seq} and \texttt{wget} to download monthly ocean
+colour data files from the ESA OC-CCI website for the years 2010-2015.
+This script is stored in an ASCII file that has been created with
+a text editor and named \texttt{multiple\_oc-cci.sh}. Check the most recent version of the occci dataset.
+\item 
+\begin{lstlisting}[language=bash,basicstyle={\footnotesize\ttfamily},breaklines=true,frame=shadowbox]
+#!/bin/sh
+user="oc-cci-data"
+passwd="ELaiWai8ae"
+url="ftp://${user}:${passwd}@ftp.rsg.pml.ac.uk/occci-vXX/geographic/netcdf/monthly/chlor_a/"
+years=$(seq 2010 2015)
+echo ${years}
+for y in ${years}
+do
+  wget -r ${url}${y}
+done
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+%
+\begin{frame}[fragile]{The output}
+
+\begin{lstlisting}[basicstyle={\tiny\ttfamily},breaklines=true,showstringspaces=false]
+$ ./multiple_oc-cci.sh
+2010 2011 2012 2013 2014 2015
+--2017-02-08 23:03:26--  ftp://oc-cci-data:*password*@ftp.rsg.pml.ac.uk/occci-v3.0/geographic/netcdf/monthly/chlor_a/2010
+           => 'ftp.rsg.pml.ac.uk/occci-v3.0/geographic/netcdf/monthly/chlor_a/.listing'
+Resolving ftp.rsg.pml.ac.uk... 192.171.164.182
+Connecting to ftp.rsg.pml.ac.uk|192.171.164.182|:21... connected.
+Logging in as oc-cci-data ... Logged in!
+==> SYST ... done.    ==> PWD ... done.
+==> TYPE I ... done.  ==> CWD (1) /occci-v3.0/geographic/netcdf/monthly/chlor_a ... done.
+==> PASV ... done.    ==> LIST ... done.
+==> CWD (1) /occci-v3.0/geographic/netcdf/monthly/chlor_a/2010 ... done.
+==> PASV ... done.    ==> LIST ... done.
+--2017-02-08 23:03:29--  ftp://oc-cci-data:*password*@ftp.rsg.pml.ac.uk/occci-v3.0/geographic/netcdf/monthly/chlor_a/2010/ESACCI-OC-L3S-CHLOR_A-MERGED-1M_MONTHLY_4km_GEO_PML_OCx-201001-fv3.0.nc
+           => 'ftp.rsg.pml.ac.uk/occci-v3.0/geographic/netcdf/monthly/chlor_a/2010/ESACCI-OC-L3S-CHLOR_A-MERGED-1M_MONTHLY_4km_GEO_PML_OCx-201001-fv3.0.nc'
+==> CWD not required.
+==> PASV ... done.    ==> RETR ESACCI-OC-L3S-CHLOR_A-MERGED-1M_MONTHLY_4km_GEO_PML_OCx-201001-fv3.0.nc ... done.
+Length: 305695550 (292M)
+aphic/netcdf/monthly/chlor_a/2010/ESAC   0%[                                                                             ]   1.13M   117KB/s    eta 57m 50s
+\end{lstlisting}
+
+The use of wget -r creates a local directory structure equal to the
+one in the remote server
+\end{frame}
+
+
+\section{Algorithms, syntax and code structures}
+\begin{frame}{Matrix approach to scientific computing}
+
+\begin{itemize}
+\item The previous script is a basic example of the \emph{loop construct},
+which is a sequential iterative operation on a given data type
+\item Matlab was one of the first languages to introduce complex data structures
+(such as vectors and matrices) as \emph{atomic} data types in an interpreted
+language
+\item This allowed the user to work with them as if they were scalar variables
+and without the need for explicit looping (\emph{a lot} more efficient)
+\item To appreciate the importance of this in the era of drag'n drop, graphical
+user interfaces and object-oriented programming, check out how low-level
+programming languages used to do the addition of a constant to a list
+of numbers (a vector)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The \sout{good} old days - FORTRAN77 vs MATLAB}
+
+
+\framesubtitle{How to add 100 to the array (1,2,3,4,5,6,7,8,9,10)}
+\begin{columns}[t]
+
+
+\column{8cm}
+
+\lstinputlisting[language=fortran,breaklines]{figures/addcnst.f}
+
+\column{6cm }
+
+\lstinputlisting[language=matlab,breaklines]{figures/addcnst.m}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Structures of a program}
+
+\begin{columns}[t]
+
+
+\column{8cm}
+\begin{itemize}
+\item {\footnotesize{}Big codes are divided in smaller portions to improve
+usability and readability. They have a }\textbf{\footnotesize{}main
+program}{\footnotesize{} and }\textbf{\footnotesize{}(sub)procedures}{\footnotesize\par}
+\item {\footnotesize{}Procedures may be }
+
+\begin{itemize}
+\item \textbf{\footnotesize{}subroutines}{\footnotesize{} smaller portions
+of the code that do certain things and can be called with specific
+arguments. They are used to structure the code in meaningful self-contained
+parts. Both the input and output arguments can be complex objects
+with multiple information}{\footnotesize\par}
+\item \textbf{\footnotesize{}functions}{\footnotesize{} these are portions
+of the code that return }\emph{\footnotesize{}at least}{\footnotesize{}
+one result. They are meant to be used many times, as for instance
+the intrinsic mathematical functions (}\texttt{\footnotesize{}sin,
+cos, sqrt}{\footnotesize{}, etc.)}{\footnotesize\par}
+\end{itemize}
+\end{itemize}
+
+\column{4cm}
+
+\includegraphics[width=4cm]{figures/functions}
+
+\includegraphics[width=3cm]{figures/subroutine}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Structured programming (Wikipedia)}
+
+\begin{center}
+\includegraphics[scale=0.5]{figures/Structured_program_patterns}
+\par\end{center}
+\begin{description}
+\item [{{\footnotesize{}Sequence}}] {\footnotesize{}ordered statements
+or subroutines executed in sequence}{\footnotesize\par}
+\item [{{\footnotesize{}Selection}}] {\footnotesize{}one or a number of
+statements is executed depending on the state of the program}\texttt{\footnotesize{}
+if..then..else..endif}{\footnotesize{}.}{\footnotesize\par}
+\item [{{\footnotesize{}Iteration}}] {\footnotesize{}a statement or block
+is executed until the program reaches a certain state, or operations
+have been applied to every element of a collection. This is usually
+expressed with keywords such as }\texttt{\footnotesize{}while, repeat,
+for or do..until}{\footnotesize{}. }{\footnotesize\par}
+\item [{{\footnotesize{}Recursion}}] {\footnotesize{}a statement is executed
+by repeatedly calling itself until termination conditions are met. }{\footnotesize\par}
+\end{description}
+\end{frame}
+
+\begin{frame}{Algorithms}
+
+\begin{definition}
+An algorithm is a specific set of instructions for carrying out a
+procedure or solving a problem, usually with the requirement that
+the procedure terminate at some point \emph{(http://mathworld.wolfram.com/Algorithm.html) }
+\end{definition}
+
+\begin{itemize}
+\item The word \textquotedbl algorithm\textquotedbl{} is a distortion of
+al-Khw\={a}rizm\={\i}, a Persian mathematician who wrote an influential
+treatise about algebraic methods
+\item The process of applying an algorithm to an input to obtain an output
+is called a computation
+\item Algorithms are presented as flow charts and usually expressed in meta-language
+terms
+\item This is done because they have to be generic and independent of the
+specific programming language
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Flow charts}
+
+\begin{columns}[t]
+
+
+\column{6cm}
+\begin{itemize}
+\item A flowchart is a graphical representation of an algorithm
+\item It uses frame symbols to indicate certain basic operations (simple
+algebraic, input/output, decision making, etc.)
+\item Symbols are connected to each other with arrows showing the flow and
+the meta-language operations are indicated inside the frame
+\end{itemize}
+
+\column{6cm}
+
+\includegraphics[width=6cm]{figures/flowchart_symbols}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]{A trivial example}
+
+\begin{columns}[t]
+
+
+\column{6cm}
+
+\begin{lstlisting}[basicstyle={\footnotesize\ttfamily},frame=shadowbox]
+Meta-language Algorithm
+
+Step 1: Start
+Step 2: Input the values of 
+        A and B
+Step 3: Check if a>b,  
+        - if yes then print 
+          "A is maximum"
+        - if no then print 
+          "B is maximum"
+Step 4: Stop
+\end{lstlisting}
+
+
+\column{6cm}
+
+\includegraphics[width=6cm]{figures/flowchart_stupid}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Another one with structured programming: Cooking a toast...}
+
+\includegraphics{figures/toast_cooking}
+\end{frame}
+
+\end{document}
