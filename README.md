@@ -24,3 +24,7 @@ This module is composed of 4 parts and one final assignment. Part 1-3 will be ru
   * Intro to Multidimensional gridded data and xarray
   * Calculations and statistics on gridded data
 5. Final assignment
+
+## Acknowledgment
+Some components of this course have been adapted from: 
+https://earth-env-data-science.github.io/intro.html
